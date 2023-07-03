@@ -12,9 +12,6 @@ fn main() {
     let pub_key_alice = Integer::from(Integer::parse_radix(&args[1], 16).unwrap());
     let pub_key_bob = Integer::from(Integer::parse_radix(&args[2], 16).unwrap());
 
-    // println!("Public key of Alice: {:?}", pub_key_alice);
-    // println!("Public key of Bob: {:?}", pub_key_bob);
-
     // initialization
     let mut priv_key_by_alice_hash: HashMap<String, String> = HashMap::new(); // in communication with Alice
     let mut priv_key_by_bob_hash: HashMap<String, String> = HashMap::new(); // in communication with Bob
@@ -23,10 +20,8 @@ fn main() {
     let mut bob_hash = String::new();
 
     let prime = Integer::from(Integer::parse_radix(PRIME, 16).unwrap());
-    // println!("Prime: {:?}", prime);
 
     let mut attacker_priv_key = Integer::from(1 as u32);
-    // println!("Attacker private key: {:?}", attacker_priv_key);
 
     loop {
         alice_hash = get_hashed_shared_key(
@@ -55,10 +50,6 @@ fn main() {
                     .get(&alice_hash)
                     .unwrap()
             );
-            // println!("Alice hash: {}", alice_hash);
-            // println!("Bob hash: {}", bob_hash);
-            // println!("Alice map: {:?}", priv_key_by_alice_hash);
-            // println!("Bob map: {:?}", priv_key_by_bob_hash);
             break;
         }
         priv_key_by_alice_hash.insert(
@@ -81,10 +72,6 @@ fn main() {
                     .to_string_radix(16)
                     .to_lowercase()
             );
-            // println!("Alice hash: {}", alice_hash);
-            // println!("Bob hash: {}", bob_hash);
-            // println!("Alice map: {:?}", priv_key_by_alice_hash);
-            // println!("Bob map: {:?}", priv_key_by_bob_hash);
             break;
         }
         priv_key_by_bob_hash.insert(
@@ -95,15 +82,6 @@ fn main() {
         );
 
         attacker_priv_key = attacker_priv_key.add(1 as i32);
-        // println!(
-        //     "Updated private key: {}",
-        //     attacker_priv_key.to_string_radix(16).to_lowercase()
-        // );
-        // println!("Alice hash: {}", alice_hash);
-        // println!("Bob hash: {}", bob_hash);
-        // println!("Alice map: {:?}", priv_key_by_alice_hash);
-        // println!("Bob map: {:?}", priv_key_by_bob_hash);
-        // break;
     }
 }
 
@@ -115,13 +93,11 @@ fn get_hashed_shared_key(
 ) -> String {
     let mut hasher = Sha3_224::new();
     let shared_key = a.clone().pow_mod(p, m).unwrap();
-    // println!("Shared key: {}", &shared_key.to_string_radix(16));
     hasher.update(
         &shared_key
             .to_string_radix(16)
             .to_lowercase(),
     );
     let result = hasher.finalize();
-    // println!("Hashed shared key: {:x}", result);
     format!("{:x}", result)
 }
