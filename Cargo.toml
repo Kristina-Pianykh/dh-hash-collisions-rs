@@ -7,8 +7,6 @@ edition = "2021"
 
 [dependencies]
 crypto-bigint = "0.5.2"
-num-bigint = "0.4.3"
-num-traits = "0.2.15"
-openssl = "0.10.55"
-openssl-src = "300.1.2"
+rug = "1.19.2"
 sha3 = "0.10.8"
+# gmp-mpfr-sys = {version = "~1.4", features = ["c-no-tests"]}
