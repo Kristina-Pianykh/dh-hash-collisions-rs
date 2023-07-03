@@ -1,0 +1,8 @@
+# indent_style = "Block"
+blank_lines_lower_bound = 2
+blank_lines_upper_bound = 2
+brace_style = "PreferSameLine"
+chain_width = 40
+fn_call_width = 30
+fn_params_layout = "Vertical"
+unstable_features=true

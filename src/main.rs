@@ -29,19 +29,31 @@ fn main() {
     // println!("Attacker private key: {:?}", attacker_priv_key);
 
     loop {
-        alice_hash =
-            get_hashed_shared_key(&pub_key_alice, &attacker_priv_key, &prime)[..PREFIX].to_string();
-        bob_hash =
-            get_hashed_shared_key(&pub_key_bob, &attacker_priv_key, &prime)[..PREFIX].to_string();
+        alice_hash = get_hashed_shared_key(
+            &pub_key_alice,
+            &attacker_priv_key,
+            &prime,
+        )[..PREFIX]
+            .to_string();
+        bob_hash = get_hashed_shared_key(
+            &pub_key_bob,
+            &attacker_priv_key,
+            &prime,
+        )[..PREFIX]
+            .to_string();
 
         if priv_key_by_bob_hash.contains_key(&alice_hash) {
             println!(
                 "Private key for Alice: {}",
-                attacker_priv_key.to_string_radix(16).to_lowercase()
+                attacker_priv_key
+                    .to_string_radix(16)
+                    .to_lowercase()
             );
             println!(
                 "Private key for Bob: {}",
-                priv_key_by_bob_hash.get(&alice_hash).unwrap()
+                priv_key_by_bob_hash
+                    .get(&alice_hash)
+                    .unwrap()
             );
             // println!("Alice hash: {}", alice_hash);
             // println!("Bob hash: {}", bob_hash);
@@ -51,17 +63,23 @@ fn main() {
         }
         priv_key_by_alice_hash.insert(
             alice_hash.clone(),
-            attacker_priv_key.to_string_radix(16).to_lowercase(),
+            attacker_priv_key
+                .to_string_radix(16)
+                .to_lowercase(),
         );
 
         if priv_key_by_alice_hash.contains_key(&bob_hash) {
             println!(
                 "Private key for Alice: {}",
-                priv_key_by_alice_hash.get(&bob_hash).unwrap()
+                priv_key_by_alice_hash
+                    .get(&bob_hash)
+                    .unwrap()
             );
             println!(
                 "Private key for Bob: {}",
-                attacker_priv_key.to_string_radix(16).to_lowercase()
+                attacker_priv_key
+                    .to_string_radix(16)
+                    .to_lowercase()
             );
             // println!("Alice hash: {}", alice_hash);
             // println!("Bob hash: {}", bob_hash);
@@ -71,7 +89,9 @@ fn main() {
         }
         priv_key_by_bob_hash.insert(
             bob_hash.clone(),
-            attacker_priv_key.to_string_radix(16).to_lowercase(),
+            attacker_priv_key
+                .to_string_radix(16)
+                .to_lowercase(),
         );
 
         attacker_priv_key = attacker_priv_key.add(1 as i32);
@@ -88,11 +108,19 @@ fn main() {
 }
 
 // a^p mod m
-fn get_hashed_shared_key(a: &Integer, p: &Integer, m: &Integer) -> String {
+fn get_hashed_shared_key(
+    a: &Integer,
+    p: &Integer,
+    m: &Integer,
+) -> String {
     let mut hasher = Sha3_224::new();
     let shared_key = a.clone().pow_mod(p, m).unwrap();
     // println!("Shared key: {}", &shared_key.to_string_radix(16));
-    hasher.update(&shared_key.to_string_radix(16).to_lowercase());
+    hasher.update(
+        &shared_key
+            .to_string_radix(16)
+            .to_lowercase(),
+    );
     let result = hasher.finalize();
     // println!("Hashed shared key: {:x}", result);
     format!("{:x}", result)
