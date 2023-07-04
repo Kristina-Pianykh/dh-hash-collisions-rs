@@ -33,4 +33,4 @@ The following table provides results for the 12 first hex digits of the hashed s
 | Python  | Standard Library  | int | ~1h:15m | |
 | Rust  | [num_bigint](https://docs.rs/num-bigint/latest/num_bigint/) | BigInt  | ~1h:40m | [e50b4ec](https://github.com/Kristina-Pianykh/dh-hash-collisions-rs/commit/e50b4ec2f79d0623dfe7d14344d98d95e0216cfd) |
 | Rust | [openssl](https://docs.rs/openssl/latest/openssl/bn/struct.BigNum.html) | BigNum | ~16m | [0c92339](https://github.com/Kristina-Pianykh/dh-hash-collisions-rs/commit/0c923397a2766d9e89bdf816dbb84ac5c9cb19eb) |
-| Rust | [rug](https://docs.rs/rug/1.19.2/rug/) | Integer | ~39m | latest version on `main` |   
+| Rust | [rug](https://docs.rs/rug/1.19.2/rug/) | Integer | ~16m | latest version on `main` |   
