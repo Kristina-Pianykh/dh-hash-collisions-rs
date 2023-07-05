@@ -12,7 +12,7 @@ The idea is to intercept the public keys of both Alice and Bob and establish a m
 
 ## Execute
 
-The program takes two args: the public key of Alice and the public key of Bob in hex
+The program takes three args: the public key of Alice in hex, the public key of Bob in hex and the number of the first hex digits of the shared hashed secret to collide
 
 ```
 docker build -t collisions .
